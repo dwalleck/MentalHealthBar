@@ -6,6 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using MentalHealthBar.Server.Contexts;
+using MentalHealthBar.Server.Services;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace MentalHealthBar.Server
 {
@@ -22,6 +27,11 @@ namespace MentalHealthBar.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MentalHealthBarContext>(opt =>
+               opt.UseNpgsql(Configuration.GetConnectionString("MentalHealthBar")));
+            services.AddTransient<IActivitiesRepository, ActivitiesRepository>();
+            services.AddTransient<IActivityEntriesRepository, ActivityEntriesRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
