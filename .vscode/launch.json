@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/Server/bin/Debug/netcoreapp3.1/MentalHealthBar.Server.dll",
+            "program": "${workspaceFolder}/src/Server/bin/Debug/net5.0/MentalHealthBar.Server.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/Server",
             "stopAtEntry": false,
