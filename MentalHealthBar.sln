@@ -2,11 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.0.0
 MinimumVisualStudioVersion = 16.0.0.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentalHealthBar.Server", "Server\MentalHealthBar.Server.csproj", "{EB8BE5A8-62D9-4370-B70B-59033F5966A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentalHealthBar.Server", "src\Server\MentalHealthBar.Server.csproj", "{EB8BE5A8-62D9-4370-B70B-59033F5966A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentalHealthBar.Client", "Client\MentalHealthBar.Client.csproj", "{2AD790EF-B45F-49C5-898E-C8BFACCA63DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentalHealthBar.Client", "src\Client\MentalHealthBar.Client.csproj", "{2AD790EF-B45F-49C5-898E-C8BFACCA63DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentalHealthBar.Shared", "Shared\MentalHealthBar.Shared.csproj", "{987F4E89-5151-431E-A3A4-4B409A7AFE5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MentalHealthBar.Shared", "src\Shared\MentalHealthBar.Shared.csproj", "{987F4E89-5151-431E-A3A4-4B409A7AFE5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
