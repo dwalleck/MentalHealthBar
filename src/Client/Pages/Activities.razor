@@ -1,0 +1,40 @@
+@page "/activities"
+@inject HttpClient HttpClient
+@using MentalHealthBar.Client.Models
+
+<h3>Activities</h3>
+
+@if (activities == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var activity in activities)
+            {
+                <tr>
+                    <td>@activity.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    
+    public List<ActivityDto> activities { get; set; } = new List<ActivityDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = new MentalHealthBarClient(HttpClient);
+        activities = await client.GetActvities();
+    }
+
+}
