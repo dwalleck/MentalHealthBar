@@ -25,16 +25,60 @@ else
             }
         </tbody>
     </table>
+    <BSButton Class="btn btn-primary" @onclick="AddActivity">Add Activity</BSButton>
+    <div>
+        <BSModal @bind-IsOpen="@isAdd" IgnoreEscape="true" IgnoreClickOnBackdrop="true">
+            <BSModalHeader @onclick="CloseModal">Add Activity</BSModalHeader>
+            <BSModalBody>
+                <div class="col-md-9">
+                    <EditForm Model="@activity" OnValidSubmit="@CreateActivity">
+                        <div class="form-group">
+                            <label for="ActivityName" class="control-label">Name</label>
+                            <InputText id="ActivityName" class="form-control" @bind-Value="activity.Name" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button class="btn btn-primary" @onclick="CloseModal">Cancel</button>
+                        </div>
+                    </EditForm>
+                </div>
+            </BSModalBody>
+        </BSModal>
+    </div>
 }
 
 @code {
-    
+
     public List<ActivityDto> activities { get; set; } = new List<ActivityDto>();
+    protected string modalTitle { get; set; }
+    protected bool isAdd { get; set; }
+    protected ActivityDto activity = new ActivityDto();
 
     protected override async Task OnInitializedAsync()
     {
         var client = new MentalHealthBarClient(HttpClient);
         activities = await client.GetActvities();
+    }
+
+    protected void AddActivity()
+    {
+        this.modalTitle = "Create Activity";
+        this.isAdd = true;
+    }
+
+    protected void CloseModal()
+    {
+        activity = new ActivityDto();
+        this.isAdd = false;
+        StateHasChanged();
+    }
+
+    protected async void CreateActivity()
+    {
+        await HttpClient.PostAsJsonAsync("api/activities", activity);
+        var client = new MentalHealthBarClient(HttpClient);
+        activities = await client.GetActvities();
+        CloseModal();
     }
 
 }

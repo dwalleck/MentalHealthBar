@@ -27,5 +27,6 @@ namespace MentalHealthBar.Client
             response.EnsureSuccessStatusCode();
             return activities;
         }
+
     }
 }
