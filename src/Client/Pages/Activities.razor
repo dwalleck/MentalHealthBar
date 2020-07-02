@@ -10,7 +10,7 @@
 }
 else
 {
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Name</th>
@@ -23,13 +23,13 @@ else
                 <tr>
                     <td>@activity.Name</td>
                     <td>
-                        <BSButton ButtonType="ButtonType.Link" Color="Color.None" Class="oi oi-trash text-danger" @onclick="@(() => DeleteActivityConfirm(activity.Id))"></BSButton>
+                        <BSButton ButtonType="ButtonType.Link" Color="Color.None" Class="fa fa-trash-alt text-danger" @onclick="@(() => DeleteActivityConfirm(activity.Id))"></BSButton>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <BSButton Class="btn btn-primary" @onclick="AddActivity">Add Activity</BSButton>
+    <button @onclick="AddActivity" class="btn btn-default float-right"><i class="fas fa-plus-circle fa-3x text-success" /></button>
     <div>
         <BSModal @bind-IsOpen="@isAdd" IgnoreEscape="true" IgnoreClickOnBackdrop="true">
             <BSModalHeader @onclick="CloseModal">Add Activity</BSModalHeader>
