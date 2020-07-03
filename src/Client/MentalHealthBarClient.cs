@@ -28,5 +28,16 @@ namespace MentalHealthBar.Client
             return activities;
         }
 
+        public async Task CreateActivityEntry(ActivityEntryDto entry)
+        {
+            var response = await _client.PostAsJsonAsync<ActivityEntryDto>("api/activityEntries", entry);
+        }
+
+        public async Task<List<ActivityEntryDto>> GetActivityEntries()
+        {
+            var response = await _client.GetFromJsonAsync<List<ActivityEntryDto>>("api/activityEntries");
+            return response;
+        }
+
     }
 }

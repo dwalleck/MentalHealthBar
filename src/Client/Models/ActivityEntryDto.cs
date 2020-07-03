@@ -12,5 +12,7 @@ namespace MentalHealthBar.Client.Models
         public DateTimeOffset RecordedAt { get; set; }
 
         public Guid ActivityId { get; set; }
+
+        public ActivityDto Activity { get; set; }
     }
 }

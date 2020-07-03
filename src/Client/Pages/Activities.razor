@@ -23,8 +23,10 @@ else
                 <tr>
                     <td>@activity.Name</td>
                     <td>
-                        <BSButton ButtonType="ButtonType.Link" Color="Color.None" Class="fa fa-trash-alt text-danger" @onclick="@(() => DeleteActivityConfirm(activity.Id))"></BSButton>
-                    </td>
+                        <button class="btn btn-default btn-table" @onclick="@(() => DeleteActivityConfirm(activity.Id))">
+                            <i class="fa fa-trash-alt text-danger" /> 
+                        </button>
+                    </td> 
                 </tr>
             }
         </tbody>

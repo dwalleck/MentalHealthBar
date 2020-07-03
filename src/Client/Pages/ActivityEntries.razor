@@ -1,0 +1,76 @@
+﻿@page "/activityEntries"
+@inject HttpClient HttpClient
+@using MentalHealthBar.Client.Models
+<h3>ActivityEntries</h3>
+
+<EditForm Model="@activityEntry" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <p>
+        <label>
+            Activity:
+            <InputSelect @bind-Value="activityId">
+                @foreach (var activity in activities)
+                {
+                <option value="@activity.Id.ToString()">@activity.Name</option> 
+                }
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Recorded At:
+            <InputDate @bind-Value="activityEntry.RecordedAt" />
+        </label>
+    </p>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Activity Name</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in activityEntries)
+            {
+                <tr>
+                    <td>@entry.Activity.Name</td>
+                    <td>@entry.RecordedAt</td> 
+                </tr>
+            }
+        </tbody>
+    </table>
+
+@code {
+
+    public List<ActivityDto> activities { get; set; } = new List<ActivityDto>();
+    public List<ActivityEntryDto> activityEntries { get; set; } = new List<ActivityEntryDto>();
+
+    public ActivityEntryDto activityEntry = new ActivityEntryDto
+    {
+        ActivityId = Guid.Empty,
+        Id = Guid.Empty,
+        RecordedAt = DateTimeOffset.UtcNow
+    };
+    public string activityId = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = new MentalHealthBarClient(HttpClient);
+        activities = await client.GetActvities();
+        activityEntries = await client.GetActivityEntries();
+    }
+
+    public async Task HandleValidSubmit()
+    {
+        activityEntry.ActivityId = Guid.Parse(activityId);
+        var client = new MentalHealthBarClient(HttpClient);
+        await client.CreateActivityEntry(activityEntry);
+        activityEntries = await client.GetActivityEntries();
+        //StateHasChanged();
+    }
+}
